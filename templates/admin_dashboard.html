@@ -5,53 +5,53 @@
 <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
 {% if election %}
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-6 flex items-center justify-between">
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-4 mb-6 flex items-center justify-between">
         <div>
-            <p class="font-semibold">{{ election.title }}</p>
-            <p class="text-sm text-slate-500">
+            <p class="font-semibold text-white">{{ election.title }}</p>
+            <p class="text-sm text-slate-400">
                 {% if election.is_open %}
-                    <span class="text-emerald-600 font-semibold">● Waa furan yahay</span>
+                    <span class="text-emerald-400 font-semibold">● Waa furan yahay</span>
                 {% else %}
-                    <span class="text-rose-600 font-semibold">● Waa xiran yahay</span>
+                    <span class="text-rose-400 font-semibold">● Waa xiran yahay</span>
                 {% endif %}
             </p>
         </div>
-        <a href="{{ url_for('admin_elections') }}" class="px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-medium hover:bg-slate-800">Maamul</a>
+        <a href="{{ url_for('admin_elections') }}" class="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700">Maamul</a>
     </div>
 {% else %}
-    <div class="bg-amber-50 border border-amber-200 text-amber-800 rounded-2xl p-4 mb-6">
+    <div class="bg-amber-900/30 border border-amber-700 text-amber-300 rounded-2xl p-4 mb-6">
         Weli ma jirto doorasho. <a href="{{ url_for('admin_election_add') }}" class="underline font-medium">Samee doorasho</a>.
     </div>
 {% endif %}
 
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Ardayda Diiwaangashan</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.students }}</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Ardayda Diiwaangashan</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.students }}</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Ardayda U Qalma</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.eligible }}</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Ardayda U Qalma</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.eligible }}</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Musharraxiinta</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.candidates }}</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Musharraxiinta</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.candidates }}</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Xilalka</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.positions }}</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Xilalka</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.positions }}</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Codadka Guud</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.votes }}</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Codadka Guud</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.votes }}</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Ardayda Codeeyay</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.voters }}</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Ardayda Codeeyay</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.voters }}</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
-        <p class="text-sm text-slate-500">Ka-qaybgalka %</p>
-        <p class="text-3xl font-bold mt-1">{{ stats.turnout }}%</p>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-5">
+        <p class="text-sm text-slate-400">Ka-qaybgalka %</p>
+        <p class="text-3xl font-bold mt-1 text-white">{{ stats.turnout }}%</p>
     </div>
 </div>
 

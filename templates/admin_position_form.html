@@ -2,22 +2,22 @@
 {% block title %}{{ 'Bedel Xil' if position else 'Ku dar Xil' }}{% endblock %}
 {% block content %}
 
-<div class="max-w-lg mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
-    <h1 class="text-2xl font-bold mb-6">{{ 'Bedel Xil' if position else 'Ku dar Xil' }}</h1>
+<div class="max-w-lg mx-auto bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-8">
+    <h1 class="text-2xl font-bold mb-6 text-white">{{ 'Bedel Xil' if position else 'Ku dar Xil' }}</h1>
     <form method="POST" class="space-y-4">
         <div>
-            <label class="block text-sm font-medium mb-1">Magaca Xilka</label>
+            <label class="block text-sm font-medium mb-1 text-slate-300">Magaca Xilka</label>
             <input type="text" name="name" required value="{{ position.name if position else '' }}"
-                   class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                   class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
         <div>
-            <label class="block text-sm font-medium mb-1">Sharaxaad</label>
+            <label class="block text-sm font-medium mb-1 text-slate-300">Sharaxaad</label>
             <textarea name="description" rows="3"
-                      class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ position.description if position else '' }}</textarea>
+                      class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">{{ position.description if position else '' }}</textarea>
         </div>
         <div class="flex gap-3">
             <button type="submit" class="bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-indigo-700">Kaydi</button>
-            <a href="{{ url_for('admin_positions') }}" class="px-6 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200">Jooji</a>
+            <a href="{{ url_for('admin_positions') }}" class="px-6 py-2.5 rounded-lg bg-slate-800 text-slate-200 font-semibold hover:bg-slate-700">Jooji</a>
         </div>
     </form>
 </div>

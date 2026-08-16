@@ -32,8 +32,8 @@
             <div class="max-w-6xl mx-auto px-4 mt-4 space-y-2">
                 {% for category, message in messages %}
                     <div class="px-4 py-3 rounded-lg text-sm font-medium
-                        {% if category == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200
-                        {% else %}bg-rose-50 text-rose-800 border border-rose-200{% endif %}">
+                        {% if category == 'success' %}bg-emerald-900/40 text-emerald-300 border border-emerald-700
+                        {% else %}bg-rose-900/40 text-rose-300 border border-rose-800{% endif %}">
                         {{ message }}
                     </div>
                 {% endfor %}

@@ -5,27 +5,27 @@
 <h1 class="text-2xl font-bold mb-6">Codadka (Results Dashboard)</h1>
 
 {% for pos in positions %}
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
-        <h2 class="text-lg font-bold mb-1">{{ pos.name }}</h2>
+    <div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 p-6 mb-6">
+        <h2 class="text-lg font-bold mb-1 text-white">{{ pos.name }}</h2>
         {% set res = data.get(pos.id, []) %}
         {% if res %}
             <div class="space-y-3 mt-4">
                 {% for r in res %}
                     <div>
                         <div class="flex justify-between text-sm mb-1">
-                            <span class="font-semibold {% if r.winner %}text-emerald-700{% endif %}">
+                            <span class="font-semibold text-slate-100 {% if r.winner %}text-emerald-400{% endif %}">
                                 {{ r.name }} {% if r.winner %}🏆{% endif %}
                             </span>
-                            <span class="text-slate-600">{{ r.votes }} cod ({{ r.pct }}%)</span>
+                            <span class="text-slate-400">{{ r.votes }} cod ({{ r.pct }}%)</span>
                         </div>
-                        <div class="w-full bg-slate-100 rounded-full h-4">
+                        <div class="w-full bg-slate-800 rounded-full h-4">
                             <div class="bg-indigo-600 h-4 rounded-full" style="width: {{ r.pct }}%"></div>
                         </div>
                     </div>
                 {% endfor %}
             </div>
         {% else %}
-            <p class="text-slate-500 mt-2">Weli ma jiraan codad xilkan.</p>
+            <p class="text-slate-400 mt-2">Weli ma jiraan codad xilkan.</p>
         {% endif %}
     </div>
 {% endfor %}
