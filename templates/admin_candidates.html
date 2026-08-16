@@ -1,0 +1,47 @@
+{% extends "admin_base.html" %}
+{% block title %}Musharraxiinta — Admin{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Maareynta Musharraxiinta</h1>
+    <a href="{{ url_for('admin_candidate_add') }}" class="bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-indigo-700">+ Ku dar Musharrax</a>
+</div>
+
+{% for pos in positions %}
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
+        <h2 class="text-lg font-bold mb-4">{{ pos.name }}</h2>
+        {% if pos.candidates %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for c in pos.candidates %}
+                    <div class="border border-slate-200 rounded-xl p-4">
+                        <div class="flex items-center gap-3 mb-2">
+                            {% if c.photo_url %}
+                                <img src="{{ c.photo_url }}" alt="{{ c.name }}" class="h-12 w-12 rounded-full object-cover">
+                            {% else %}
+                                <span class="inline-flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">{{ c.name[0] }}</span>
+                            {% endif %}
+                            <div>
+                                <p class="font-semibold">{{ c.name }}</p>
+                                <p class="text-xs text-slate-500">{{ c.student_id or '' }}</p>
+                            </div>
+                        </div>
+                        {% if c.manifesto %}
+                            <p class="text-sm text-slate-600 mb-3">{{ c.manifesto }}</p>
+                        {% endif %}
+                        <div class="flex gap-3 text-sm">
+                            <a href="{{ url_for('admin_candidate_edit', cid=c.id) }}" class="text-indigo-600 font-medium hover:underline">Bedel</a>
+                            <form method="POST" action="{{ url_for('admin_candidate_delete', cid=c.id) }}"
+                                  onsubmit="return confirm('Ma hubtaa inaad tirtirto musharraxkan?');">
+                                <button class="text-rose-600 font-medium hover:underline">Tirtir</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-slate-500">Ma jiraan musharraxiin xilkan.</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% endblock %}

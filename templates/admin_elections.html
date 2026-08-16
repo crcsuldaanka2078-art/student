@@ -1,0 +1,54 @@
+{% extends "admin_base.html" %}
+{% block title %}Doorashada — Admin{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Maareynta Doorashada</h1>
+    <a href="{{ url_for('admin_election_add') }}" class="bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-indigo-700">+ Samee Doorasho</a>
+</div>
+
+<div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+    <table class="w-full text-sm">
+        <thead class="bg-slate-50 text-slate-600">
+            <tr>
+                <th class="text-left px-4 py-3">Cinwaan</th>
+                <th class="text-left px-4 py-3">Bilow</th>
+                <th class="text-left px-4 py-3">Dhammaad</th>
+                <th class="text-left px-4 py-3">Xaalad</th>
+                <th class="text-right px-4 py-3">Tallaabo</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+            {% for e in elections %}
+                <tr>
+                    <td class="px-4 py-3 font-medium">{{ e.title }}</td>
+                    <td class="px-4 py-3 text-slate-600">{{ (e.start_at or '—')[:16] }}</td>
+                    <td class="px-4 py-3 text-slate-600">{{ (e.end_at or '—')[:16] }}</td>
+                    <td class="px-4 py-3">
+                        {% if e.is_open %}
+                            <span class="px-2 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-semibold">Waa furan</span>
+                        {% else %}
+                            <span class="px-2 py-1 rounded-full bg-slate-200 text-slate-600 text-xs font-semibold">Waa xiran</span>
+                        {% endif %}
+                    </td>
+                    <td class="px-4 py-3 text-right space-x-2">
+                        <form method="POST" action="{{ url_for('admin_election_toggle', eid=e.id) }}" class="inline">
+                            <button class="text-indigo-600 font-medium hover:underline">
+                                {{ 'Xir' if e.is_open else 'Fur' }}
+                            </button>
+                        </form>
+                        <a href="{{ url_for('admin_election_edit', eid=e.id) }}" class="text-indigo-600 font-medium hover:underline">Bedel</a>
+                        <form method="POST" action="{{ url_for('admin_election_delete', eid=e.id) }}" class="inline"
+                              onsubmit="return confirm('Ma hubtaa inaad tirtirto doorashadan?');">
+                            <button class="text-rose-600 font-medium hover:underline">Tirtir</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5" class="px-4 py-6 text-center text-slate-500">Ma jiraan doorashooyin.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

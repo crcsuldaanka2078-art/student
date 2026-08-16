@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Doorashadu Waa Xiran Tahay{% endblock %}
+{% block content %}
+
+<div class="max-w-xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center">
+    <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 text-amber-600 text-3xl mb-4">⏰</div>
+    <h1 class="text-2xl font-bold mb-2">Doorashadu Hadda Waa Xiran Tahay</h1>
+    <p class="text-slate-600 mb-4">
+        Waqtiga codbixintu waa la xannibay. Fadlan la xiriir maamulka (admin) haddii aad leedahay su'aal.
+    </p>
+    <a href="{{ url_for('index') }}" class="inline-block bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-indigo-700">Eeg Xaaladda</a>
+</div>
+
+{% endblock %}

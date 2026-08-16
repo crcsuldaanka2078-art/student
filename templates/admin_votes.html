@@ -1,23 +1,15 @@
-{% extends "base.html" %}
-{% block title %}Natiijooyinka — Codbixinta Ardayda{% endblock %}
+{% extends "admin_base.html" %}
+{% block title %}Codadka — Admin{% endblock %}
 {% block content %}
 
-<div class="flex items-center justify-between mb-6">
-    <h1 class="text-2xl font-bold">Natiijooyinka Doorashada</h1>
-    {% if election %}
-        <span class="px-3 py-1 rounded-full text-sm font-semibold
-            {% if election.is_open %}bg-emerald-100 text-emerald-700{% else %}bg-slate-200 text-slate-600{% endif %}">
-            {{ '● Waa furan' if election.is_open else '● Waa xiran' }}
-        </span>
-    {% endif %}
-</div>
+<h1 class="text-2xl font-bold mb-6">Codadka (Results Dashboard)</h1>
 
 {% for pos in positions %}
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
-        <h2 class="text-xl font-bold mb-4">{{ pos.name }}</h2>
+        <h2 class="text-lg font-bold mb-1">{{ pos.name }}</h2>
         {% set res = data.get(pos.id, []) %}
         {% if res %}
-            <div class="space-y-4">
+            <div class="space-y-3 mt-4">
                 {% for r in res %}
                     <div>
                         <div class="flex justify-between text-sm mb-1">
@@ -32,12 +24,8 @@
                     </div>
                 {% endfor %}
             </div>
-            {% set winner = res[0] %}
-            {% if winner.votes > 0 %}
-                <p class="mt-4 text-emerald-700 font-bold">🏆 Guuleyste: {{ winner.name }}</p>
-            {% endif %}
         {% else %}
-            <p class="text-slate-500">Weli ma jiraan codad.</p>
+            <p class="text-slate-500 mt-2">Weli ma jiraan codad xilkan.</p>
         {% endif %}
     </div>
 {% endfor %}

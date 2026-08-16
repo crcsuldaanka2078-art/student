@@ -5,6 +5,12 @@
 <div class="bg-indigo-600 rounded-2xl text-white p-8 mb-8">
     <h1 class="text-3xl font-bold mb-2">Ku soo dhawoow Nidaamka Codbixinta Ardayda</h1>
     <p class="text-indigo-100 mb-4">Xulo hogaamiyeyaasha ardayda si xor ah oo qarsoodi ah. Arday kastaa hal mar ayuu cod bixin karaa.</p>
+    {% if election %}
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-4 text-sm font-semibold
+            {% if election.is_open %}bg-emerald-100 text-emerald-700{% else %}bg-white/20 text-white{% endif %}">
+            {% if election.is_open %}● Doorashadu waa furan tahay{% else %}● Doorashadu waa xiran tahay{% endif %}
+        </div>
+    {% endif %}
     <div class="flex flex-wrap gap-3">
         <a href="{{ url_for('vote') if current_user.is_authenticated else url_for('login') }}"
            class="inline-block bg-white text-indigo-700 font-semibold px-5 py-2.5 rounded-lg hover:bg-indigo-50">Codee Hadda</a>
@@ -28,7 +34,9 @@
                 {% for r in res %}
                     <div>
                         <div class="flex justify-between text-sm mb-1">
-                            <span class="font-medium">{{ r.name }}</span>
+                            <span class="font-medium {% if r.winner %}text-emerald-700{% endif %}">
+                                {{ r.name }} {% if r.winner %}🏆{% endif %}
+                            </span>
                             <span>{{ r.votes }} cod ({{ r.pct }}%)</span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-3">

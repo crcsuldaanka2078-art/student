@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="so" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin — Codbixinta Ardayda{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
+</head>
+<body class="h-full bg-slate-100 text-slate-900 antialiased">
+
+    <nav class="bg-slate-900 text-white shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="{{ url_for('admin_dashboard') }}" class="flex items-center gap-2 font-bold text-lg">
+                <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600">🛠️</span>
+                <span>Admin — Codbixinta Ardayda</span>
+            </a>
+            <div class="flex items-center gap-1 text-sm">
+                <a href="{{ url_for('admin_dashboard') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Dashboard</a>
+                <a href="{{ url_for('admin_students') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Ardayda</a>
+                <a href="{{ url_for('admin_candidates') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Musharraxiinta</a>
+                <a href="{{ url_for('admin_positions') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Xilalka</a>
+                <a href="{{ url_for('admin_elections') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Doorashada</a>
+                <a href="{{ url_for('admin_votes') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Codadka</a>
+                <a href="{{ url_for('admin_reports') }}" class="px-3 py-2 rounded-lg hover:bg-slate-700">Warbixin</a>
+                <a href="{{ url_for('admin_logout') }}" class="px-3 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 ml-2">Bax</a>
+            </div>
+        </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="max-w-6xl mx-auto px-4 mt-4 space-y-2">
+                {% for category, message in messages %}
+                    <div class="px-4 py-3 rounded-lg text-sm font-medium
+                        {% if category == 'success' %}bg-emerald-50 text-emerald-800 border border-emerald-200
+                        {% else %}bg-rose-50 text-rose-800 border border-rose-200{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

@@ -22,7 +22,14 @@
                                {% if checked %}checked{% endif %}>
                         <div class="p-4 rounded-xl border-2 border-slate-200 hover:border-indigo-400
                                     peer-checked:border-indigo-600 peer-checked:bg-indigo-50 transition">
-                            <div class="font-semibold mb-1">{{ cand.name }}</div>
+                            <div class="flex items-center gap-3 mb-2">
+                                {% if cand.photo_url %}
+                                    <img src="{{ cand.photo_url }}" alt="{{ cand.name }}" class="h-10 w-10 rounded-full object-cover">
+                                {% else %}
+                                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold">{{ cand.name[0] }}</span>
+                                {% endif %}
+                                <div class="font-semibold">{{ cand.name }}</div>
+                            </div>
                             {% if cand.manifesto %}
                                 <p class="text-sm text-slate-600 mb-3">{{ cand.manifesto }}</p>
                             {% endif %}

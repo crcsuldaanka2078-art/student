@@ -1,0 +1,47 @@
+{% extends "admin_base.html" %}
+{% block title %}Warbixin — Admin{% endblock %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Warbixinta Doorashada</h1>
+
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+        <p class="text-sm text-slate-500">Ardayda Diiwaangashan</p>
+        <p class="text-3xl font-bold mt-1">{{ students }}</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+        <p class="text-sm text-slate-500">U Qalma</p>
+        <p class="text-3xl font-bold mt-1">{{ eligible }}</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+        <p class="text-sm text-slate-500">Codadka Guud</p>
+        <p class="text-3xl font-bold mt-1">{{ total_votes }}</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+        <p class="text-sm text-slate-500">Ardayda Codeeyay</p>
+        <p class="text-3xl font-bold mt-1">{{ total_voters }}</p>
+    </div>
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5">
+        <p class="text-sm text-slate-500">Ka-qaybgalka %</p>
+        <p class="text-3xl font-bold mt-1">{{ turnout }}%</p>
+    </div>
+</div>
+
+<h2 class="text-xl font-bold mb-4">Guuleystayaasha (Winner xil kasta)</h2>
+{% for pos in positions %}
+    {% set res = results.get(pos.id, []) %}
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-4">
+        <p class="font-semibold mb-1">{{ pos.name }}</p>
+        {% if res %}
+            {% set winner = res[0] %}
+            <p class="text-emerald-700 font-bold">🏆 {{ winner.name }} — {{ winner.votes }} cod ({{ winner.pct }}%)</p>
+            {% if res|length > 1 and res[1].votes == winner.votes %}
+                <p class="text-amber-600 font-medium">(Isku-xidh: {{ res[1].name }})</p>
+            {% endif %}
+        {% else %}
+            <p class="text-slate-500">Ma jiraan codad.</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% endblock %}

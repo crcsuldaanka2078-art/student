@@ -1,0 +1,35 @@
+{% extends "admin_base.html" %}
+{% block title %}{{ 'Bedel Doorasho' if election else 'Samee Doorasho' }}{% endblock %}
+{% block content %}
+
+<div class="max-w-lg mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+    <h1 class="text-2xl font-bold mb-6">{{ 'Bedel Doorasho' if election else 'Samee Doorasho' }}</h1>
+    <form method="POST" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium mb-1">Cinwaanka Doorashada</label>
+            <input type="text" name="title" required value="{{ election.title if election else '' }}"
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-1">Waqtiga Bilaabista (optional)</label>
+            <input type="datetime-local" name="start_at" value="{{ election.start_at[:16] if election and election.start_at else '' }}"
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-1">Waqtiga Dhammaadka (optional)</label>
+            <input type="datetime-local" name="end_at" value="{{ election.end_at[:16] if election and election.end_at else '' }}"
+                   class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
+        </div>
+        <div class="flex items-center gap-2">
+            <input type="checkbox" name="is_open" id="is_open" class="h-4 w-4"
+                   {% if election and election.is_open %}checked{% endif %}>
+            <label for="is_open" class="text-sm font-medium">Fur doorashada hadda</label>
+        </div>
+        <div class="flex gap-3">
+            <button type="submit" class="bg-indigo-600 text-white font-semibold px-6 py-2.5 rounded-lg hover:bg-indigo-700">Kaydi</button>
+            <a href="{{ url_for('admin_elections') }}" class="px-6 py-2.5 rounded-lg bg-slate-100 text-slate-700 font-semibold hover:bg-slate-200">Jooji</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
