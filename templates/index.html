@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Guriga — Codbixinta Ardayda{% endblock %}
+{% block content %}
+
+<div class="bg-indigo-600 rounded-2xl text-white p-8 mb-8">
+    <h1 class="text-3xl font-bold mb-2">Ku soo dhawoow Nidaamka Codbixinta Ardayda</h1>
+    <p class="text-indigo-100 mb-4">Xulo hogaamiyeyaasha ardayda si xor ah oo qarsoodi ah. Arday kastaa hal mar ayuu cod bixin karaa.</p>
+    <div class="flex flex-wrap gap-3">
+        <a href="{{ url_for('vote') if current_user.is_authenticated else url_for('login') }}"
+           class="inline-block bg-white text-indigo-700 font-semibold px-5 py-2.5 rounded-lg hover:bg-indigo-50">Codee Hadda</a>
+        <a href="{{ url_for('register') if not current_user.is_authenticated else url_for('results') }}"
+           class="inline-block border border-indigo-300 px-5 py-2.5 rounded-lg font-semibold hover:bg-indigo-700">
+           {{ 'Isdiiwaangeli' if not current_user.is_authenticated else 'Natiijooyinka' }}</a>
+    </div>
+</div>
+
+<h2 class="text-2xl font-bold mb-6">Xillada Doorashada & Natiijooyinka</h2>
+
+{% for pos in positions %}
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-xl font-bold">{{ pos.name }}</h3>
+            <span class="text-sm text-slate-500">{{ pos.description }}</span>
+        </div>
+        {% set res = results.get(pos.id, []) %}
+        {% if res %}
+            <div class="space-y-3">
+                {% for r in res %}
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-medium">{{ r.name }}</span>
+                            <span>{{ r.votes }} cod ({{ r.pct }}%)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-3">
+                            <div class="bg-indigo-600 h-3 rounded-full" style="width: {{ r.pct }}%"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-slate-500">Ma jiraan codad wali.</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% endblock %}

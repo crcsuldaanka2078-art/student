@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Xaqiiji Codkaga — Codbixinta Ardayda{% endblock %}
+{% block content %}
+
+<div class="max-w-2xl mx-auto">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+        <h1 class="text-2xl font-bold mb-2 text-center">Xaqiiji Codkaga</h1>
+        <p class="text-sm text-slate-500 text-center mb-6">
+            Fadlan hubi doorashadaada. Markaad xaqiijiso, <span class="font-semibold text-slate-700">codkaga lama beddeli karo</span>.
+        </p>
+
+        <div class="space-y-3 mb-6">
+            {% for item in summary %}
+                <div class="flex items-center justify-between p-4 rounded-xl border border-slate-200 bg-slate-50">
+                    <span class="text-sm font-medium text-slate-500">{{ item.position }}</span>
+                    <span class="font-semibold text-indigo-700">{{ item.candidate }}</span>
+                </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST" class="space-y-3">
+            <button type="submit"
+                    class="w-full bg-emerald-600 text-white font-semibold py-3 rounded-lg hover:bg-emerald-700">
+                Haa, Xaqiiji Codkayga
+            </button>
+            <a href="{{ url_for('vote') }}"
+               class="block w-full text-center bg-slate-100 text-slate-700 font-semibold py-3 rounded-lg hover:bg-slate-200">
+                Dib u eeg, Ma beddelayo
+            </a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}Codee — Codbixinta Ardayda{% endblock %}
+{% block content %}
+
+<div class="flex items-center justify-between mb-8">
+    <h1 class="text-2xl font-bold">Go'aansada Hogaamiyeyaashaada</h1>
+    <span class="text-sm text-slate-600">Ku soo dhawoow, {{ current_user.name }}</span>
+</div>
+
+<form method="POST">
+    {% for pos in positions %}
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
+            <h2 class="text-xl font-bold mb-1">{{ pos.name }}</h2>
+            <p class="text-sm text-slate-500 mb-4">{{ pos.description }}</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {% for cand in pos.candidates %}
+                    {% set checked = existing.get(pos.id) == cand.id %}
+                    <label class="block cursor-pointer">
+                        <input type="radio" name="position_{{ pos.id }}" value="{{ cand.id }}"
+                               class="peer sr-only"
+                               {% if checked %}checked{% endif %}>
+                        <div class="p-4 rounded-xl border-2 border-slate-200 hover:border-indigo-400
+                                    peer-checked:border-indigo-600 peer-checked:bg-indigo-50 transition">
+                            <div class="font-semibold mb-1">{{ cand.name }}</div>
+                            {% if cand.manifesto %}
+                                <p class="text-sm text-slate-600 mb-3">{{ cand.manifesto }}</p>
+                            {% endif %}
+                            <span class="text-xs font-medium text-indigo-600
+                                         peer-checked:inline hidden">✓ Waa la doortay</span>
+                        </div>
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="flex items-center justify-between">
+        <p class="text-sm text-slate-500">Markaad codka dhiibto, <span class="font-semibold text-slate-700">lama beddeli karo</span> oo hal mar kaliya ayaad cod bixin kartaa.</p>
+        <button type="submit"
+                class="bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-indigo-700"
+                onclick="return confirm('Ma hubtaa inaad codka dhiibanaysid? Hal mar kaliya ayaad cod bixin kartaa oo kadibna lama beddeli karo.');">
+            Dhiib Codkayga
+        </button>
+    </div>
+</form>
+
+{% endblock %}

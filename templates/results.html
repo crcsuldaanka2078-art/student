@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Natiijooyinka — Codbixinta Ardayda{% endblock %}
+{% block content %}
+
+<h1 class="text-2xl font-bold mb-6">Natiijooyinka Doorashada</h1>
+
+{% for pos in positions %}
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
+        <h2 class="text-xl font-bold mb-4">{{ pos.name }}</h2>
+        {% set res = data.get(pos.id, []) %}
+        {% if res %}
+            <div class="space-y-4">
+                {% for r in res %}
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="font-semibold">{{ r.name }}</span>
+                            <span class="text-slate-600">{{ r.votes }} cod ({{ r.pct }}%)</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-4">
+                            <div class="bg-indigo-600 h-4 rounded-full" style="width: {{ r.pct }}%"></div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-slate-500">Weli ma jiraan codad.</p>
+        {% endif %}
+    </div>
+{% endfor %}
+
+{% endblock %}
