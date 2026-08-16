@@ -63,15 +63,25 @@ def clear_table(name):
     supabase.table(name).delete().gt("id", 0).execute()
 
 
+def clear_all():
+    """Delete rows in dependency order."""
+    for name in ("votes", "candidates", "positions", "eligible_students", "students", "admins", "elections"):
+        try:
+            clear_table(name)
+        except Exception as exc:
+            print(f"  (skip {name}: {str(exc)[:80]})")
+
+
 def main():
+    print("Clearing existing data ...")
+    clear_all()
+
     print("Populating eligible_students (15) ...")
-    clear_table("eligible_students")
     supabase.table("eligible_students").insert(
         [{"student_id": sid, "name": name, "email": email} for sid, name, email in STUDENTS]
     ).execute()
 
     print("Populating positions (6) ...")
-    clear_table("positions")
     pos_rows = (
         supabase.table("positions")
         .insert([{"name": name, "description": desc} for name, desc in POSITIONS])
@@ -80,7 +90,6 @@ def main():
     pos_by_index = {row["name"]: row["id"] for row in pos_rows.data}
 
     print("Populating candidates (13) ...")
-    clear_table("candidates")
     for sid, name, pos_index, manifesto in CANDIDATES:
         supabase.table("candidates").insert(
             {
@@ -92,7 +101,6 @@ def main():
         ).execute()
 
     print("Populating admin ...")
-    clear_table("admins")
     supabase.table("admins").insert(
         {
             "username": "admin",
@@ -101,7 +109,10 @@ def main():
     ).execute()
 
     print("Clearing elections ...")
-    clear_table("elections")
+    try:
+        clear_table("elections")
+    except Exception:
+        pass
 
     print("Done! Now students can register from the registration page.")
     print("-" * 50)

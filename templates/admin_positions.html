@@ -7,30 +7,30 @@
     <a href="{{ url_for('admin_position_add') }}" class="bg-indigo-600 text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-indigo-700">+ Ku dar Xil</a>
 </div>
 
-<div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+<div class="bg-slate-900 rounded-2xl shadow-lg border border-slate-800 overflow-hidden">
     <table class="w-full text-sm">
-        <thead class="bg-slate-50 text-slate-600">
+        <thead class="bg-slate-800 text-slate-300">
             <tr>
                 <th class="text-left px-4 py-3">Magaca</th>
                 <th class="text-left px-4 py-3">Sharaxaad</th>
                 <th class="text-right px-4 py-3">Tallaabo</th>
             </tr>
         </thead>
-        <tbody class="divide-y divide-slate-100">
+        <tbody class="divide-y divide-slate-700">
             {% for p in positions %}
-                <tr>
-                    <td class="px-4 py-3 font-medium">{{ p.name }}</td>
-                    <td class="px-4 py-3 text-slate-600">{{ p.description }}</td>
+                <tr class="hover:bg-slate-800/50">
+                    <td class="px-4 py-3 font-medium text-white">{{ p.name }}</td>
+                    <td class="px-4 py-3 text-slate-300">{{ p.description }}</td>
                     <td class="px-4 py-3 text-right space-x-2">
-                        <a href="{{ url_for('admin_position_edit', pid=p.id) }}" class="text-indigo-600 font-medium hover:underline">Bedel</a>
+                        <a href="{{ url_for('admin_position_edit', pid=p.id) }}" class="text-indigo-400 font-medium hover:text-indigo-300">Bedel</a>
                         <form method="POST" action="{{ url_for('admin_position_delete', pid=p.id) }}" class="inline"
                               onsubmit="return confirm('Ma hubtaa inaad tirtirto xilkan?');">
-                            <button class="text-rose-600 font-medium hover:underline">Tirtir</button>
+                            <button class="text-rose-400 font-medium hover:text-rose-300">Tirtir</button>
                         </form>
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="3" class="px-4 py-6 text-center text-slate-500">Ma jiraan xilal.</td></tr>
+                <tr><td colspan="3" class="px-4 py-6 text-center text-slate-400">Ma jiraan xilal.</td></tr>
             {% endfor %}
         </tbody>
     </table>
